@@ -1,0 +1,6 @@
+﻿  Source.cpp
+E:\Code\ghostHunter\ghostHunter\Source.cpp(39,14): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+E:\Code\ghostHunter\ghostHunter\Source.cpp(39,16): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+E:\Code\ghostHunter\ghostHunter\Source.cpp(63,27): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+E:\Code\ghostHunter\ghostHunter\Source.cpp(63,29): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+  ghostHunter.vcxproj -> E:\Code\ghostHunter\Debug\ghostHunter.exe
