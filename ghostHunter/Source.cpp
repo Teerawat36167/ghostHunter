@@ -5,6 +5,12 @@
 
 //ghostHunter
 
+struct ghost {
+	int gx;
+	int gy;
+	int hp;
+}ghost[6];
+
 void draw_map() {//map
 	printf("+__________________________________________________+\n");
 	printf("|        xx   xx    xxx   xx       xxx    xxxxx    |\n");
@@ -75,6 +81,49 @@ void draw_ghost(int x, int y) {//draw ghost
 	printf("W");
 }
 
+void ghost_run() {
+	int i;
+	for (int a=0 ; a <= 5; a++) {
+		i = rand() % 4 + 1;
+		if (i == 1) {
+			if (cursor(ghost[a].gx - 1, ghost[a].gy) == 'x' || (ghost[a].gx == 1)) {
+				draw_ghost(ghost[a].gx, ghost[a].gy);
+			}
+			else {
+				del_draw(ghost[a].gx, ghost[a].gy);
+				draw_ghost(--ghost[a].gx, ghost[a].gy);
+			}
+		}
+		if (i == 2) {
+			if (cursor(ghost[a].gx + 1, ghost[a].gy) == 'x' || (ghost[a].gx == 50)) {
+				draw_ghost(ghost[a].gx, ghost[a].gy);
+			}
+			else {
+				del_draw(ghost[a].gx, ghost[a].gy);
+				draw_ghost(++ghost[a].gx, ghost[a].gy);
+			}
+		}
+		if (i == 3) {
+			if (cursor(ghost[a].gx, ghost[a].gy - 1) == 'x' || (ghost[a].gy == 1)) { //if hunter hit the wall then continue
+				draw_ghost(ghost[a].gx, ghost[a].gy);
+			}
+			else {
+				del_draw(ghost[a].gx, ghost[a].gy);
+				draw_ghost(ghost[a].gx, --ghost[a].gy);
+			}
+		}
+		if (i == 4) {
+			if (cursor(ghost[a].gx, ghost[a].gy + 1) == 'x' || (ghost[a].gy == 25)) {
+				draw_ghost(ghost[a].gx, ghost[a].gy);
+			}
+			else {
+				del_draw(ghost[a].gx, ghost[a].gy);
+				draw_ghost(ghost[a].gx, ++ghost[a].gy);
+			}
+		}
+	}
+}
+
 void score() {//show score
 
 }
@@ -84,16 +133,36 @@ int main() {
 	draw_map();
 	char ch = ' ';
 	int x = 4, y = 4;
+	ghost[1].gx = 32;
+	ghost[1].gy = 4;
+	ghost[2].gx = 26;
+	ghost[2].gy = 20;
+	ghost[0].gx = 6;
+	ghost[0].gy = 23;
+	ghost[3].gx = 13;
+	ghost[3].gy = 10;
+	ghost[4].gx = 1;
+	ghost[4].gy = 9;
+	ghost[5].gx = 16;
+	ghost[5].gy = 7;
+	srand(time(NULL));
 	draw_hunter(x, y);
+	draw_ghost(ghost[0].gx, ghost[0].gy);
+	draw_ghost(ghost[1].gx, ghost[1].gy);
+	draw_ghost(ghost[2].gx, ghost[2].gy);
+	draw_ghost(ghost[3].gx, ghost[3].gy);
+	draw_ghost(ghost[4].gx, ghost[4].gy);
+	draw_ghost(ghost[5].gx, ghost[5].gy);
 	do {
 		if (_kbhit()) { //keyboard check
 			ch = _getch();
+			ghost_run();
 			if (ch == 'a') {
 				if (x == 1) {//if x,y = condition then continue
 					continue;
 				}
 				else {
-					if (cursor(--x, y) == 'x') {
+					if (cursor(--x, y) == 'x') { //if hunter hit the wall then continue
 						draw_hunter(++x, y);
 					}
 					else {
@@ -103,11 +172,11 @@ int main() {
 				}
 			}
 			if (ch == 'd') {
-				if (x == 50) {//ถ้า x=50 จะไม่เกิดอะไรขึ้น
+				if (x == 50) {//if x,y = condition then continue
 					continue;
 				}
 				else {
-					if (cursor(++x, y) == 'x') {
+					if (cursor(++x, y) == 'x') { //if hunter hit the wall then continue
 						draw_hunter(--x, y);
 					}
 					else {
@@ -135,7 +204,7 @@ int main() {
 					continue;
 				}
 				else {
-					if (cursor(x, ++y) == 'x') {
+					if (cursor(x, ++y) == 'x') { //if hunter hit the wall then continue
 						draw_hunter(x, --y);
 					}
 					else {
