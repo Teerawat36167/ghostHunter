@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <Windows.h>
-#include <conio.h>
-#include <time.h>
-#include <iostream>
-using namespace std;
+#include "ScoreBoard.h"
 
 //ghostHunter
 
@@ -14,6 +9,7 @@ int pt = 30;//count point
 int pHunter = 0;//power hunter
 int countPower = 2;//count power
 int countWalk = 0;//count walk
+int randomMap;//randommap
 int timePower = 0;//time of power
 
 struct ghost {
@@ -41,11 +37,6 @@ struct power {
 void setcolor(int fg, int bg) {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, bg * 16 + fg);
-}
-
-void gotoxy(int x, int y) {//go to x,y
-	COORD c = { x,y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
 void main_menu() {//main menu
@@ -170,6 +161,7 @@ void draw_map1() {//map1
 }
 
 void game_over() {//clear screen
+	ScoreBoard(name, sc);
 	gotoxy(0, 0);
 	setcolor(7, 0);
 	printf("+_______________________________________________________\n");
@@ -201,6 +193,12 @@ void game_over() {//clear screen
 	printf("|                                                       \n");
 	printf("|                                                       \n");
 	_getch(); //keyboard check
+}
+
+void score_board() {
+	gotoxy(0, 0);
+	setcolor(7, 0);
+	scoreUI();
 }
 
 void draw_hunter(int x, int y) {//draw hunter
@@ -345,62 +343,65 @@ int main() {
 		player_name();
 		char ch = ' ';
 		char ch2 = ' ';
-		draw_map1();
-		//hunter map 1
-		hunter = { 4,4,2,0 };
-		//ghost position map 1
-		ghost[0] = { 1,9 };
-		ghost[1] = { 1,17 };
-		ghost[2] = { 2,1 };
-		ghost[3] = { 6,23 };
-		ghost[4] = { 8,10 };
-		ghost[5] = { 14,15 };
-		ghost[6] = { 16,7 };
-		ghost[7] = { 16,25 };
-		ghost[8] = { 23,1 };
-		ghost[9] = { 24,9 };
-		ghost[10] = { 26,20 };
-		ghost[11] = { 31,15 };
-		ghost[12] = { 32,4 };
-		ghost[13] = { 32,25 };
-		ghost[14] = { 41,13 };
-		ghost[15] = { 43,6 };
-		ghost[16] = { 44,22 };
-		ghost[17] = { 50,1 };
-		//point position map 1
-		point[0] = { 1,1 };
-		point[1] = { 9,3 };
-		point[2] = { 2,20 };
-		point[3] = { 6,17 };
-		point[4] = { 8,8 };
-		point[5] = { 8,12 };
-		point[6] = { 9,23 };
-		point[7] = { 13,20 };
-		point[8] = { 17,19 };
-		point[9] = { 18,22 };
-		point[10] = { 20,5 };
-		point[11] = { 20,9 };
-		point[12] = { 23,13 };
-		point[13] = { 27,18 };
-		point[14] = { 28,5 };
-		point[15] = { 28,25 };
-		point[16] = { 29,10 };
-		point[17] = { 32,1 };
-		point[18] = { 34,15 };
-		point[19] = { 35,6 };
-		point[20] = { 37,10 };
-		point[21] = { 37,19 };
-		point[22] = { 38,1 };
-		point[23] = { 44,12 };
-		point[24] = { 44,25 };
-		point[25] = { 46,2 };
-		point[26] = { 46,8 };
-		point[27] = { 46,17 };
-		point[28] = { 50,5 };
-		point[29] = { 50,21 };
-		//power position map 1
-		POW[0] = { 10,16 };
-		POW[1] = { 38,14 };
+		randomMap = 1;
+		if (randomMap == 1) {
+			draw_map1();
+			//hunter map 1
+			hunter = { 4,4,2,0 };
+			//ghost position map 1
+			ghost[0] = { 1,9 };
+			ghost[1] = { 1,17 };
+			ghost[2] = { 2,1 };
+			ghost[3] = { 6,23 };
+			ghost[4] = { 8,10 };
+			ghost[5] = { 14,15 };
+			ghost[6] = { 16,7 };
+			ghost[7] = { 16,25 };
+			ghost[8] = { 23,1 };
+			ghost[9] = { 24,9 };
+			ghost[10] = { 26,20 };
+			ghost[11] = { 31,15 };
+			ghost[12] = { 32,4 };
+			ghost[13] = { 32,25 };
+			ghost[14] = { 41,13 };
+			ghost[15] = { 43,6 };
+			ghost[16] = { 44,22 };
+			ghost[17] = { 50,1 };
+			//point position map 1
+			point[0] = { 1,1 };
+			point[1] = { 9,3 };
+			point[2] = { 2,20 };
+			point[3] = { 6,17 };
+			point[4] = { 8,8 };
+			point[5] = { 8,12 };
+			point[6] = { 9,23 };
+			point[7] = { 13,20 };
+			point[8] = { 17,19 };
+			point[9] = { 18,22 };
+			point[10] = { 20,5 };
+			point[11] = { 20,9 };
+			point[12] = { 23,13 };
+			point[13] = { 27,18 };
+			point[14] = { 28,5 };
+			point[15] = { 28,25 };
+			point[16] = { 29,10 };
+			point[17] = { 32,1 };
+			point[18] = { 34,15 };
+			point[19] = { 35,6 };
+			point[20] = { 37,10 };
+			point[21] = { 37,19 };
+			point[22] = { 38,1 };
+			point[23] = { 44,12 };
+			point[24] = { 44,25 };
+			point[25] = { 46,2 };
+			point[26] = { 46,8 };
+			point[27] = { 46,17 };
+			point[28] = { 50,5 };
+			point[29] = { 50,21 };
+			//power position map 1
+			POW[0] = { 10,16 };
+			POW[1] = { 38,14 };
+		}
 		for (int a = 0; a <= 17; a++) {
 			draw_ghost(ghost[a].gx, ghost[a].gy);
 		}
@@ -496,8 +497,10 @@ int main() {
 				for (int b = 0; b <= 17; b++) {
 					if (hunter.x == ghost[b].gx && hunter.y == ghost[b].gy && pHunter == 0) {
 						lp -= 1;
-						hunter.x = 4;
-						hunter.y = 4;
+						if (randomMap == 1) {//map1
+							hunter.x = 4;
+							hunter.y = 4;
+						}
 					}
 				}
 
@@ -525,8 +528,10 @@ int main() {
 					if (hunter.x == ghost[b].gx && hunter.y == ghost[b].gy && pHunter == 1) {
 						sc += 300;
 						pHunter -= 1;
-						ghost[b].gx = 21;
-						ghost[b].gy = 17;
+						if (randomMap == 1) {//If map1
+							ghost[b].gx = 21;
+							ghost[b].gy = 17;
+						}
 					}
 				}
 
@@ -542,21 +547,26 @@ int main() {
 						continue;
 					}
 					if (countPower == 1) {
-						if (cursor(10, 16) == ' ') {
-							POW[0] = { 10,16 };
-							draw_power(0);
-						}
-						else if (cursor(38, 14) == ' ') {
-							POW[1] = { 38,14 };
-							draw_power(1);
+						if (randomMap == 1) {
+							if (cursor(10, 16) == ' ') {
+								POW[0] = { 10,16 };
+								draw_power(0);
+							}
+							else if (cursor(38, 14) == ' ') {
+								POW[1] = { 38,14 };
+								draw_power(1);
+							}
 						}
 						countPower += 1;
 					}
 					if (countPower == 0) {
-						POW[0] = { 10,16 };
-						POW[1] = { 38,14 };
-						draw_power(0);
-						draw_power(1);
+						if (randomMap == 1) {
+							POW[0] = { 10,16 };
+							POW[1] = { 38,14 };
+							draw_power(0);
+							draw_power(1);
+						}
+						countPower += 2;
 					}
 				}
 
@@ -572,6 +582,7 @@ int main() {
 			Sleep(100);
 		} while (ch != 'x' && lp != 0 && pt != 0);
 		game_over();
+		score_board();
 	}
 	return 0;
 }
