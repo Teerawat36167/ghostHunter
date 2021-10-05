@@ -1,4 +1,9 @@
-#include "ScoreBoard.h"
+#include <stdio.h>
+#include <Windows.h>
+#include <conio.h>
+#include <time.h>
+#include <iostream>
+using namespace std;
 
 //ghostHunter
 
@@ -9,7 +14,6 @@ int pt = 30;//count point
 int pHunter = 0;//power hunter
 int countPower = 2;//count power
 int countWalk = 0;//count walk
-int randomMap;//randommap
 int timePower = 0;//time of power
 
 struct ghost {
@@ -37,6 +41,11 @@ struct power {
 void setcolor(int fg, int bg) {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, bg * 16 + fg);
+}
+
+void gotoxy(int x, int y) {//go to x,y
+	COORD c = { x,y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
 void main_menu() {//main menu
@@ -160,42 +169,7 @@ void draw_map1() {//map1
 	printf("---------------------------------------------------------+\n");
 }
 
-void draw_map2() {//map2
-	gotoxy(0, 0);
-	setcolor(7, 0);
-	printf("+__________________________________________________+     +\n");
-	printf("|xx   xxx     xxx   xxxxx        xxxx            xx|     |\n");
-	printf("|xx x xxx xxx xxx x xx    xx xxx xx   xxx x xx x xx|     |\n");
-	printf("|   x               xx xx xx        x     x    x   |     |\n");
-	printf("| xxxx x x xxx xxxx    x     xx xx xx xx xxx x xx x|     |\n");
-	printf("|   x  x x   x x    xx   x x  x xx    xx   x x    x|     |\n");
-	printf("| x   xx xxx   x xxx   xxx xx    xx x    x   x x xx|     |\n");
-	printf("| xxx x      x   xx  x     x  xx    x xx xx xx x   |     |\n");
-	printf("| x   x xx x xxx    xxx xx x xxxxx xx xx xx    xxx |     |\n");
-	printf("|   x   xx x x   x  x    x       x    x     xx     |     |\n");
-	printf("|xx xxx x  x x xxx    xx x xxx x   xx x xxx xx x xx|     |\n");
-	printf("|xx xx    xx   x    x xx   x   xx xx     x     x xx|     |\n");
-	printf("|x     xx    x x xx x    x x x xx x  x x   x xx    |     |\n");
-	printf("|x xx xx  x xx x xx xx xxx   x      xx x xx     xx |     |\n");
-	printf("|x x  xx xx x              x x xxx xxx x xx x x x  |     |\n");
-	printf("|  x xxx      xxx xxx xxxx x   xx      x x  x x   x|     |\n");
-	printf("| xx     x xx xx   xx   x    x x  x xx     xx xx xx|     |\n");
-	printf("|    x xxx xx    x   xx   xx x   xx xx xx x        |     |\n");
-	printf("|xx xx     xxxx xx x xx xxx  xx xx     x    xx xxx |     |\n");
-	printf("|xx xxx xx    x    x      x xx     x x   xxxx  x   |     |\n");
-	printf("|       xx xx   x xxxx xx x    x xxx xxx   x   x x |     |\n");
-	printf("| xxx x     xx xx      xx  x xx          x   x   x |     |\n");
-	printf("| xxx x x x    xx xx x  xx      x x xx x xx xx x   |     |\n");
-	printf("|     x x xx x x   x  x  xx xx x  x  x x  x xx x xx|     |\n");
-	printf("| xx xx x x  x   x xx xx  x xx x xxx x xx    x x xx|     |\n");
-	printf("|    xx     xxxxxx    xxx      x       xxxxx     xx|     |\n");
-	printf("+--------------------------------------------------+     |\n");
-	printf("                                                         |\n");
-	printf("---------------------------------------------------------+\n");
-}
-
 void game_over() {//clear screen
-	ScoreBoard(name, sc);
 	gotoxy(0, 0);
 	setcolor(7, 0);
 	printf("+_______________________________________________________\n");
@@ -227,12 +201,6 @@ void game_over() {//clear screen
 	printf("|                                                       \n");
 	printf("|                                                       \n");
 	_getch(); //keyboard check
-}
-
-void score_board() {
-	gotoxy(0, 0);
-	setcolor(7, 0);
-	scoreUI();
 }
 
 void draw_hunter(int x, int y) {//draw hunter
@@ -377,123 +345,62 @@ int main() {
 		player_name();
 		char ch = ' ';
 		char ch2 = ' ';
-		randomMap = rand() % 2 + 1;
-		if (randomMap == 1) {
-			draw_map1();
-			//hunter map 1
-			hunter = { 4,4,2,0 };
-			//ghost position map 1
-			ghost[0] = { 1,9 };
-			ghost[1] = { 1,17 };
-			ghost[2] = { 2,1 };
-			ghost[3] = { 6,23 };
-			ghost[4] = { 8,10 };
-			ghost[5] = { 14,15 };
-			ghost[6] = { 16,7 };
-			ghost[7] = { 16,25 };
-			ghost[8] = { 23,1 };
-			ghost[9] = { 24,9 };
-			ghost[10] = { 26,20 };
-			ghost[11] = { 31,15 };
-			ghost[12] = { 32,4 };
-			ghost[13] = { 32,25 };
-			ghost[14] = { 41,13 };
-			ghost[15] = { 43,6 };
-			ghost[16] = { 44,22 };
-			ghost[17] = { 50,1 };
-			//point position map 1
-			point[0] = { 1,1 };
-			point[1] = { 9,3 };
-			point[2] = { 2,20 };
-			point[3] = { 6,17 };
-			point[4] = { 8,8 };
-			point[5] = { 8,12 };
-			point[6] = { 9,23 };
-			point[7] = { 13,20 };
-			point[8] = { 17,19 };
-			point[9] = { 18,22 };
-			point[10] = { 20,5 };
-			point[11] = { 20,9 };
-			point[12] = { 23,13 };
-			point[13] = { 27,18 };
-			point[14] = { 28,5 };
-			point[15] = { 28,25 };
-			point[16] = { 29,10 };
-			point[17] = { 32,1 };
-			point[18] = { 34,15 };
-			point[19] = { 35,6 };
-			point[20] = { 37,10 };
-			point[21] = { 37,19 };
-			point[22] = { 38,1 };
-			point[23] = { 44,12 };
-			point[24] = { 44,25 };
-			point[25] = { 46,2 };
-			point[26] = { 46,8 };
-			point[27] = { 46,17 };
-			point[28] = { 50,5 };
-			point[29] = { 50,21 };
-			//power position map 1
-			POW[0] = { 10,16 };
-			POW[1] = { 38,14 };
-		}
-		if (randomMap == 2) {
-			draw_map2();
-			//hunter map 2
-			hunter = { 26,13,2,0 };
-			//ghost position map 2
-			ghost[0] = { 3,3 };
-			ghost[1] = { 3,20 };
-			ghost[2] = { 8,14 };
-			ghost[3] = { 7,25 };
-			ghost[4] = { 10,5 };
-			ghost[5] = { 14,22 };
-			ghost[6] = { 15,14 };
-			ghost[7] = { 16,7 };
-			ghost[8] = { 22,4 };
-			ghost[9] = { 23,19 };
-			ghost[10] = { 28,25 };
-			ghost[11] = { 30,15 };
-			ghost[12] = { 31,3 };
-			ghost[13] = { 36,21 };
-			ghost[14] = { 39,6 };
-			ghost[15] = { 43,13 };
-			ghost[16] = { 46,4 };
-			ghost[17] = { 46,20 };
-			//point position map 2
-			point[0] = { 2,5 };
-			point[1] = { 3,10 };
-			point[2] = { 2,15 };
-			point[3] = { 1,25 };
-			point[4] = { 5,22 };
-			point[5] = { 9,25 };
-			point[6] = { 7,7 };
-			point[7] = { 9,2 };
-			point[8] = { 9,12 };
-			point[9] = { 9,18 };
-			point[10] = { 13,14 };
-			point[11] = { 14,4 };
-			point[12] = { 15,9 };
-			point[13] = { 16,24 };
-			point[14] = { 17,19 };
-			point[15] = { 21,16 };
-			point[16] = { 22,7 };
-			point[17] = { 23,23 };
-			point[18] = { 27,1 };
-			point[19] = { 29,7 };
-			point[20] = { 30,13 };
-			point[21] = { 30,24 };
-			point[22] = { 33,19 };
-			point[23] = { 38,24 };
-			point[24] = { 38,13 };
-			point[25] = { 40,3 };
-			point[26] = { 42,9 };
-			point[27] = { 43,18 };
-			point[28] = { 48,22 };
-			point[29] = { 49,5 };
-			//power position map 2
-			POW[0] = { 6,12 };
-			POW[1] = { 40,12 };
-		}
+		draw_map1();
+		//hunter map 1
+		hunter = { 4,4,2,0 };
+		//ghost position map 1
+		ghost[0] = { 1,9 };
+		ghost[1] = { 1,17 };
+		ghost[2] = { 2,1 };
+		ghost[3] = { 6,23 };
+		ghost[4] = { 8,10 };
+		ghost[5] = { 14,15 };
+		ghost[6] = { 16,7 };
+		ghost[7] = { 16,25 };
+		ghost[8] = { 23,1 };
+		ghost[9] = { 24,9 };
+		ghost[10] = { 26,20 };
+		ghost[11] = { 31,15 };
+		ghost[12] = { 32,4 };
+		ghost[13] = { 32,25 };
+		ghost[14] = { 41,13 };
+		ghost[15] = { 43,6 };
+		ghost[16] = { 44,22 };
+		ghost[17] = { 50,1 };
+		//point position map 1
+		point[0] = { 1,1 };
+		point[1] = { 9,3 };
+		point[2] = { 2,20 };
+		point[3] = { 6,17 };
+		point[4] = { 8,8 };
+		point[5] = { 8,12 };
+		point[6] = { 9,23 };
+		point[7] = { 13,20 };
+		point[8] = { 17,19 };
+		point[9] = { 18,22 };
+		point[10] = { 20,5 };
+		point[11] = { 20,9 };
+		point[12] = { 23,13 };
+		point[13] = { 27,18 };
+		point[14] = { 28,5 };
+		point[15] = { 28,25 };
+		point[16] = { 29,10 };
+		point[17] = { 32,1 };
+		point[18] = { 34,15 };
+		point[19] = { 35,6 };
+		point[20] = { 37,10 };
+		point[21] = { 37,19 };
+		point[22] = { 38,1 };
+		point[23] = { 44,12 };
+		point[24] = { 44,25 };
+		point[25] = { 46,2 };
+		point[26] = { 46,8 };
+		point[27] = { 46,17 };
+		point[28] = { 50,5 };
+		point[29] = { 50,21 };
+		//power position map 1
+		POW[0] = { 10,16 };
+		POW[1] = { 38,14 };
 		for (int a = 0; a <= 17; a++) {
 			draw_ghost(ghost[a].gx, ghost[a].gy);
 		}
@@ -589,14 +496,8 @@ int main() {
 				for (int b = 0; b <= 17; b++) {
 					if (hunter.x == ghost[b].gx && hunter.y == ghost[b].gy && pHunter == 0) {
 						lp -= 1;
-						if (randomMap == 1) {//map1
-							hunter.x = 4;
-							hunter.y = 4;
-						}
-						if (randomMap == 2) {//map2
-							hunter.x = 26;
-							hunter.y = 13;
-						}
+						hunter.x = 4;
+						hunter.y = 4;
 					}
 				}
 
@@ -624,14 +525,8 @@ int main() {
 					if (hunter.x == ghost[b].gx && hunter.y == ghost[b].gy && pHunter == 1) {
 						sc += 300;
 						pHunter -= 1;
-						if (randomMap == 1) {//If map1
-							ghost[b].gx = 21;
-							ghost[b].gy = 17;
-						}
-						if (randomMap == 2) {//If map2
-							ghost[b].gx = 26;
-							ghost[b].gy = 11;
-						}
+						ghost[b].gx = 21;
+						ghost[b].gy = 17;
 					}
 				}
 
@@ -647,42 +542,21 @@ int main() {
 						continue;
 					}
 					if (countPower == 1) {
-						if (randomMap == 1) {
-							if (cursor(10, 16) == ' ') {
-								POW[0] = { 10,16 };
-								draw_power(0);
-							}
-							else if (cursor(38, 14) == ' ') {
-								POW[1] = { 38,14 };
-								draw_power(1);
-							}
+						if (cursor(10, 16) == ' ') {
+							POW[0] = { 10,16 };
+							draw_power(0);
 						}
-						if (randomMap == 2) {
-							if (cursor(6, 12) == ' ') {
-								POW[0] = { 6,12 };
-								draw_power(0);
-							}
-							else if (cursor(40, 12) == ' ') {
-								POW[1] = { 40,12 };
-								draw_power(1);
-							}
+						else if (cursor(38, 14) == ' ') {
+							POW[1] = { 38,14 };
+							draw_power(1);
 						}
 						countPower += 1;
 					}
 					if (countPower == 0) {
-						if (randomMap == 1) {
-							POW[0] = { 10,16 };
-							POW[1] = { 38,14 };
-							draw_power(0);
-							draw_power(1);
-						}
-						if (randomMap == 2) {
-							POW[0] = { 6,12 };
-							POW[1] = { 40,12 };
-							draw_power(0);
-							draw_power(1);
-						}
-						countPower += 2;
+						POW[0] = { 10,16 };
+						POW[1] = { 38,14 };
+						draw_power(0);
+						draw_power(1);
 					}
 				}
 
@@ -698,7 +572,6 @@ int main() {
 			Sleep(100);
 		} while (ch != 'x' && lp != 0 && pt != 0);
 		game_over();
-		score_board();
 	}
 	return 0;
 }
