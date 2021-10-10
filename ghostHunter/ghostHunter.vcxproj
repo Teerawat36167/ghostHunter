@@ -145,6 +145,10 @@
     <ClInclude Include="ScoreBoard.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="game_over.txt" />
+    <Text Include="main_menu.txt" />
+    <Text Include="map1.txt" />
+    <Text Include="player_name.txt" />
     <Text Include="score.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

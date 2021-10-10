@@ -43,79 +43,31 @@ void main_menu() {//main menu
 	int i = 1;
 	gotoxy(0, 0);
 	setcolor(7, 0);
-	printf("+________________________________________________________+\n");
-	printf("|                                                        |\n");
-	printf("|                xxx x  x xxxx xxxx xxxxx                |\n");
-	printf("|               x    x  x x  x x      x                  |\n");
-	printf("|               x xx xxxx x  x xxxx   x                  |\n");
-	printf("|               x  x x  x x  x    x   x                  |\n");
-	printf("|                xx  x  x xxxx xxxx   x                  |\n");
-	printf("|                                                        |\n");
-	printf("|            x  x x  x x   x xxxxx xxxx xxx              |\n");
-	printf("|            x  x x  x xx  x   x   x    x  x             |\n");
-	printf("|            xxxx x  x x x x   x   xxxx xxx              |\n");
-	printf("|            x  x x  x x  xx   x   x    x x              |\n");
-	printf("|            x  x xxxx x   x   x   xxxx x  x             |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("+--------------------------------------------------------+\n");
-	while (i != 0) {
-		gotoxy(24, 27);
-		printf("TEERAWAT CHANVIPARDILOK 64011154");
-		setcolor(6, 0);
-		gotoxy(16, 19);
-		printf("press any key to continue");
-		if (_getch()) {
-			i = 0;
-		}
+	FILE* fp;
+	fp = fopen("main_menu.txt", "r");
+	while (!feof(fp)) {
+		char c = fgetc(fp);
+		printf("%c", c);
 	}
+	fclose(fp);
+	gotoxy(24, 27);
+	printf("TEERAWAT CHANVIPARDILOK 64011154");
+	setcolor(6, 0);
+	gotoxy(16, 19);
+	printf("press any key to continue");
+	_getch();
 }
 
 void player_name() {//Enter player name
 	gotoxy(0, 0);
 	setcolor(7, 0);
-	printf("+________________________________________________________+\n");
-	printf("|                                                        |\n");
-	printf("|                xxx x  x xxxx xxxx xxxxx                |\n");
-	printf("|               x    x  x x  x x      x                  |\n");
-	printf("|               x xx xxxx x  x xxxx   x                  |\n");
-	printf("|               x  x x  x x  x    x   x                  |\n");
-	printf("|                xx  x  x xxxx xxxx   x                  |\n");
-	printf("|                                                        |\n");
-	printf("|            x  x x  x x   x xxxxx xxxx xxx              |\n");
-	printf("|            x  x x  x xx  x   x   x    x  x             |\n");
-	printf("|            xxxx x  x x x x   x   xxxx xxx              |\n");
-	printf("|            x  x x  x x  xx   x   x    x x              |\n");
-	printf("|            x  x xxxx x   x   x   xxxx x  x             |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|      Enter player name :                               |\n");
-	printf("|        (10 character)                                  |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("|                                                        |\n");
-	printf("+--------------------------------------------------------+\n");
+	FILE* fp;
+	fp = fopen("player_name.txt", "r");
+	while (!feof(fp)) {
+		char c = fgetc(fp);
+		printf("%c", c);
+	}
+	fclose(fp);
 	gotoxy(24, 27);
 	printf("TEERAWAT CHANVIPARDILOK 64011154");
 	setcolor(6, 0);
@@ -129,69 +81,28 @@ void player_name() {//Enter player name
 void draw_map1() {//map1
 	gotoxy(0, 0);
 	setcolor(7, 0);
-	printf("+__________________________________________________+     +\n");
-	printf("|        xx   xx    xxx   xx       xxx    xxxxx    |     |\n");
-	printf("| xx xxx x  x    xx xxx x xx xxx x  xx xx   x   xx |     |\n");
-	printf("| xx xxx   xxx x xx     x xx xxx xx     x x   x  x |     |\n");
-	printf("|     xx x     x   xxx x   x x      x x   xxx xx x |     |\n");
-	printf("| xxx xx xxx xx  x       x     x xx x xxx xxx      |     |\n");
-	printf("| xxx        xx xx xxxx xxxx xx  x  x         xxx x|     |\n");
-	printf("| xxx xx xxx xx    xx   xx   xx xx xxxx xxxx xx   x|     |\n");
-	printf("| xxx xx  xx xxx x xx x xx x     x        x     x x|     |\n");
-	printf("|     xxx    xxx x    x    xx xx x xx x x x xxx x  |     |\n");
-	printf("| xxx     xx     xx x xxx xx   x   xx   x   xx   x |     |\n");
-	printf("|   xxxx xxxx xx    x      x x  xx xx x xx xxx x   |     |\n");
-	printf("|xx x    xx    xx xx  x xx   xx x     x        xx x|     |\n");
-	printf("|xx   xx    xx xx    xx xxxx x    xx xxxx xx x  x x|     |\n");
-	printf("|xx xxxx xx xx    xx xx  xx    x xxx    x    xx    |     |\n");
-	printf("|x  xxxx xx    xx xx   x  x xxx  x   xx  x x  xx x |     |\n");
-	printf("|x xxxxx    x xxx   xx xx     x xx x  xx x xx x  x |     |\n");
-	printf("|  xx    xxx   xx x       x x      xx      x    xx |     |\n");
-	printf("| xxx xx xx  x    xx xx xx  x xxxx  xx xx xx xx    |     |\n");
-	printf("| xxx xx  x xx xx  x xx xx xx   xxx     x     xxx x|     |\n");
-	printf("|       x x    xxx x x   x   xx     xxx xx xx   x x|     |\n");
-	printf("|xxx xx   x xx xxx     x   x x  x x xx   x  x x    |     |\n");
-	printf("|xxx xxxxxx xx xxx x xxxx xx x xx x    x  x    xxx |     |\n");
-	printf("|xx  x           x x    x xx      x xx xx   xx   x |     |\n");
-	printf("|xx xx xx xxx xx x x xx    xx xx xx x   xx xx  x   |     |\n");
-	printf("|xx    xx     xx     xxxxx    xx      x       xxxxx|     |\n");
-	printf("+--------------------------------------------------+     |\n");
-	printf("                                                         |\n");
-	printf("---------------------------------------------------------+\n");
+	FILE* fp;
+	fp = fopen("map1.txt", "r");
+	while (!feof(fp)) {
+		char c = fgetc(fp);
+		printf("%c", c);
+	}
+	fclose(fp);
 }
 
 void game_over() {//clear screen
 	ScoreBoard(name, sc);
 	gotoxy(0, 0);
 	setcolor(7, 0);
-	printf("+_______________________________________________________\n");
-	printf("|                                                       \n");
-	printf("|                                                       \n");
-	printf("|             xxxx     xx      x   x    xxxxx           \n");
-	printf("|            x    x   x  x    x x x x   x               \n");
-	printf("|            x    x  x    x  x   x   x  x               \n");
-	printf("|            x       x    x  x   x   x  xxxxx           \n");
-	printf("|            x  xxx  x    x  x   x   x  x               \n");
-	printf("|            x    x  xxxxxx  x   x   x  x               \n");
-	printf("|            x    x  x    x  x   x   x  x               \n");
-	printf("|             xxxx   x    x  x   x   x  xxxxx           \n");
-	printf("|                                                       \n");
-	printf("|              xx    x     x  xxxxx   xxxx              \n");
-	printf("|             x  x   x     x  x       x   x             \n");
-	printf("|            x    x   x   x   x       x   x             \n");
-	printf("|            x    x   x   x   xxxxx   x   x             \n");
-	printf("|            x    x    x x    x       xxxx              \n");
-	printf("|            x    x    x x    x       x x               \n");
-	printf("|             x  x      x     x       x  x              \n");
-	printf("|              xx       x     xxxxx   x   x             \n");
-	printf("|                                                       \n");
-	printf("|                                                       \n");
-	printf("|                                                       \n");
-	printf("|                      SCORE : %d                      \n", sc);
-	printf("|                                                       \n");
-	printf("|                                                       \n");
-	printf("|                                                       \n");
-	printf("|                                                       \n");
+	FILE* fp;
+	fp = fopen("game_over.txt", "r");
+	while (!feof(fp)) {
+		char c = fgetc(fp);
+		printf("%c", c);
+	}
+	fclose(fp);
+	gotoxy(31,23);
+	cout << sc;
 	_getch(); //keyboard check
 }
 

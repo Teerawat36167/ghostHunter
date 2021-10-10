@@ -28,5 +28,17 @@
     <Text Include="score.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="map1.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="main_menu.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="game_over.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="player_name.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

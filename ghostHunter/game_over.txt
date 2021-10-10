@@ -1,0 +1,29 @@
++________________________________________________________+
+|                                                        |
+|                                                        |
+|             xxxx     xx      x   x    xxxxx            |
+|            x    x   x  x    x x x x   x                |
+|            x    x  x    x  x   x   x  x                |
+|            x       x    x  x   x   x  xxxxx            |
+|            x  xxx  x    x  x   x   x  x                |
+|            x    x  xxxxxx  x   x   x  x                |
+|            x    x  x    x  x   x   x  x                |
+|             xxxx   x    x  x   x   x  xxxxx            |
+|                                                        |
+|              xx    x     x  xxxxx   xxxx               |
+|             x  x   x     x  x       x   x              |
+|            x    x   x   x   x       x   x              |
+|            x    x   x   x   xxxxx   x   x              |
+|            x    x    x x    x       xxxx               |
+|            x    x    x x    x       x x                |
+|             x  x      x     x       x  x               |
+|              xx       x     xxxxx   x   x              |
+|                                                        |
+|                                                        |
+|                                                        |
+|                      SCORE :                           |
+|                                                        |
+|                                                        |
+|                                                        |
+|                                                        |
++--------------------------------------------------------+
