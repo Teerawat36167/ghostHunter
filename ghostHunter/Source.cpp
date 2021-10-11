@@ -149,6 +149,12 @@ void draw_ghost(int x, int y) {//draw ghost
 	printf("W");
 }
 
+void draw_superGhost(int x, int y) {//draw super ghost
+	gotoxy(x, y);
+	setcolor(5, 0);
+	printf("W");
+}
+
 void draw_point() {//draw point
 	for (int i = 0; i <= 29; i++) {
 		gotoxy(point[i].px, point[i].py);
@@ -165,7 +171,7 @@ void draw_power(int i) {//draw power
 
 void ghost_run() {
 	int i;
-	for (int a = 0; a <= 17; a++) {
+	for (int a = 5; a <= 17; a++) {
 		i = rand() % 4 + 1;
 		if (i == 1) {
 			if (cursor(ghost[a].gx - 1, ghost[a].gy) == 'x' || (ghost[a].gx == 1)) {
@@ -222,6 +228,84 @@ void ghost_run() {
 	}
 }
 
+void superGhost_run(int x) {
+	int i;
+	if (ghost[x].gx < hunter.x) {
+		while (true) {
+			i = rand() % 4 + 1;
+			if (i != 3) {
+				break;
+			}
+		}
+	}
+	if (ghost[x].gx > hunter.x) {
+		i = rand() % 3 + 1;
+	}
+	if (ghost[x].gy < hunter.y && ghost[x].gx == hunter.x) {
+		i = rand() % 4 + 2;
+	}
+	if (ghost[x].gy > hunter.y && ghost[x].gx == hunter.x) {
+		while (true) {
+			i = rand() % 4 + 1;
+			if (i != 2) {
+				break;
+			}
+		}
+	}
+	if (i == 3) {
+		if (cursor(ghost[x].gx - 1, ghost[x].gy) == 'x' || (ghost[x].gx == 1)) {
+			draw_superGhost(ghost[x].gx, ghost[x].gy);
+		}
+		else {
+			del_draw(ghost[x].gx, ghost[x].gy);
+			draw_superGhost(--ghost[x].gx, ghost[x].gy);
+		}
+	}
+	if (i == 4) {
+		if (cursor(ghost[x].gx + 1, ghost[x].gy) == 'x' || (ghost[x].gx == 50)) {
+			draw_superGhost(ghost[x].gx, ghost[x].gy);
+		}
+		else {
+			del_draw(ghost[x].gx, ghost[x].gy);
+			draw_superGhost(++ghost[x].gx, ghost[x].gy);
+		}
+	}
+	if (i == 1) {
+		if (cursor(ghost[x].gx, ghost[x].gy - 1) == 'x' || (ghost[x].gy == 1)) {
+			draw_superGhost(ghost[x].gx, ghost[x].gy);
+		}
+		else {
+			del_draw(ghost[x].gx, ghost[x].gy);
+			draw_superGhost(ghost[x].gx, --ghost[x].gy);
+		}
+	}
+	if (i == 2) {
+		if (cursor(ghost[x].gx, ghost[x].gy + 1) == 'x' || (ghost[x].gy == 25)) {
+			draw_superGhost(ghost[x].gx, ghost[x].gy);
+		}
+		else {
+			del_draw(ghost[x].gx, ghost[x].gy);
+			draw_superGhost(ghost[x].gx, ++ghost[x].gy);
+		}
+	}
+	for (int b = 0; b <= 29; b++) { //if ghost hit point then nothing happen
+		if ((ghost[x].gy - 1 == point[b].py && ghost[x].gx == point[b].px) || (ghost[x].gx - 1 == point[b].px && ghost[x].gy == point[b].py) ||
+			(ghost[x].gx + 1 == point[b].px && ghost[x].gy == point[b].py) || (ghost[x].gy + 1 == point[b].py && ghost[x].gx == point[b].px)) {
+			gotoxy(point[b].px, point[b].py);
+			setcolor(3, 0);
+			printf(".");
+		}
+	}
+	for (int b = 0; b <= 1; b++) { //if ghost hit power then nothing happen
+		if ((ghost[x].gy - 1 == POW[b].powy && ghost[x].gx == POW[b].powx) || (ghost[x].gx - 1 == POW[b].powx && ghost[x].gy == POW[b].powy) ||
+			(ghost[x].gx + 1 == POW[b].powx && ghost[x].gy == POW[b].powy) || (ghost[x].gy + 1 == POW[b].powy && ghost[x].gx == POW[b].powx)) {
+			gotoxy(POW[b].powx, POW[b].powy);
+			setcolor(2, 0);
+			printf("P");
+		}
+	}
+}
+
 void score() {//show score
 	gotoxy(2, 27);
 	setcolor(7, 0);
@@ -253,28 +337,27 @@ int main() {
 		main_menu();
 		player_name();
 		char ch = ' ';
-		char ch2 = ' ';
 		randomMap = 1;
 		if (randomMap == 1) {
 			draw_map1();
 			//hunter map 1
 			hunter = { 4,4,2,0 };
 			//ghost position map 1
-			ghost[0] = { 1,9 };
-			ghost[1] = { 1,17 };
-			ghost[2] = { 2,1 };
-			ghost[3] = { 6,23 };
-			ghost[4] = { 8,10 };
-			ghost[5] = { 14,15 };
+			ghost[0] = { 1,9 };//super ghost
+			ghost[1] = { 14, 15 };//super ghost
+			ghost[2] = { 31, 15 };//super ghost
+			ghost[3] = { 41, 13 };//super ghost
+			ghost[4] = { 32, 25 };//super ghost
+			ghost[5] = { 1,17 };
 			ghost[6] = { 16,7 };
 			ghost[7] = { 16,25 };
 			ghost[8] = { 23,1 };
 			ghost[9] = { 24,9 };
 			ghost[10] = { 26,20 };
-			ghost[11] = { 31,15 };
+			ghost[11] = { 2,1 };
 			ghost[12] = { 32,4 };
-			ghost[13] = { 32,25 };
-			ghost[14] = { 41,13 };
+			ghost[13] = { 8,10 };
+			ghost[14] = { 6,23 };
 			ghost[15] = { 43,6 };
 			ghost[16] = { 44,22 };
 			ghost[17] = { 50,1 };
@@ -313,7 +396,10 @@ int main() {
 			POW[0] = { 10,16 };
 			POW[1] = { 38,14 };
 		}
-		for (int a = 0; a <= 17; a++) {
+		for (int a = 0; a <= 4; a++) {
+			draw_superGhost(ghost[a].gx, ghost[a].gy);
+		}
+		for (int a = 5; a <= 17; a++) {
 			draw_ghost(ghost[a].gx, ghost[a].gy);
 		}
 		draw_point();
@@ -328,6 +414,11 @@ int main() {
 			if (_kbhit()) { //keyboard check
 				ch = _getch();
 				ghost_run();
+				superGhost_run(0);
+				superGhost_run(1);
+				superGhost_run(2);
+				superGhost_run(3);
+				superGhost_run(4);
 				if (ch == 'a') {
 					if (hunter.x == 1) {//if x,y = condition then continue
 						continue;
