@@ -57,34 +57,14 @@ inline void scoreUI() {
         fscanf(fp, "%d", &score[i]);
     }
     fclose(fp);
-    printf("+_______________________________________________________\n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|           xxxxx  xxxx  xxxxx  xxxx   xxxxx            \n");
-    printf("|           x      x     x   x  x   x  x                \n");
-    printf("|           xxxxx  x     x   x  xxxx   xxxxx            \n");
-    printf("|               x  x     x   x  x x    x                \n");
-    printf("|               x  x     x   x  x  x   x                \n");
-    printf("|           xxxxx  xxxx  xxxxx  x   x  xxxxx            \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
-    printf("|                                                       \n");
+    gotoxy(0, 0);
+    FILE* fp1;
+    fp1 = fopen("score_board.txt", "r");
+    while (!feof(fp1)) {
+        char c = fgetc(fp1);
+        printf("%c", c);
+    }
+    fclose(fp1);
     gotoxy(18, 10);
     cout << name[0];
     gotoxy(33, 10);

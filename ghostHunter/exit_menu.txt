@@ -1,0 +1,29 @@
++________________________________________________________+
+|                                                        |
+|                xxx x  x xxxx xxxx xxxxx                |
+|               x    x  x x  x x      x                  |
+|               x xx xxxx x  x xxxx   x                  |
+|               x  x x  x x  x    x   x                  |
+|                xx  x  x xxxx xxxx   x                  |
+|                                                        |
+|            x  x x  x x   x xxxxx xxxx xxx              |
+|            x  x x  x xx  x   x   x    x  x             |
+|            xxxx x  x x x x   x   xxxx xxx              |
+|            x  x x  x x  xx   x   x    x x              |
+|            x  x xxxx x   x   x   xxxx x  x             |
+|                                                        |
+|                                                        |
+|                                                        |
+|              Press P to go to main menu                |
+|                                                        |
+|                                                        |
+|                                                        |
+|                Press x to quit game                    |
+|                                                        |
+|                                                        |
+|                                                        |
+|                                                        |
+|                                                        |
+|                                                        |
+|            TEERAWAT CHANVIPARDILOK 64011154            |
++--------------------------------------------------------+

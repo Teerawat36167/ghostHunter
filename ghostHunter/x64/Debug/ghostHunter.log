@@ -1,7 +1,7 @@
 ﻿  Source.cpp
 E:\Clone\ghostHunter\ghostHunter\ScoreBoard.h(15,17): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
 E:\Clone\ghostHunter\ghostHunter\ScoreBoard.h(15,19): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-E:\Clone\ghostHunter\ghostHunter\Source.cpp(136,27): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-E:\Clone\ghostHunter\ghostHunter\Source.cpp(136,29): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
-E:\Clone\ghostHunter\ghostHunter\Source.cpp(335,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Clone\ghostHunter\ghostHunter\Source.cpp(158,27): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+E:\Clone\ghostHunter\ghostHunter\Source.cpp(158,29): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+E:\Clone\ghostHunter\ghostHunter\Source.cpp(357,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   ghostHunter.vcxproj -> E:\Clone\ghostHunter\x64\Debug\ghostHunter.exe

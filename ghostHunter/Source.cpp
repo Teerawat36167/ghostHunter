@@ -40,7 +40,6 @@ void setcolor(int fg, int bg) {
 }
 
 void main_menu() {//main menu
-	int i = 1;
 	gotoxy(0, 0);
 	setcolor(7, 0);
 	FILE* fp;
@@ -50,12 +49,12 @@ void main_menu() {//main menu
 		printf("%c", c);
 	}
 	fclose(fp);
-	gotoxy(24, 27);
-	printf("TEERAWAT CHANVIPARDILOK 64011154");
 	setcolor(6, 0);
-	gotoxy(16, 19);
-	printf("press any key to continue");
-	_getch();
+	gotoxy(16, 16);
+	printf("press any key to continue"); 
+	setcolor(4, 0);
+	gotoxy(18, 19);
+	printf("press x to quit game");
 }
 
 void player_name() {//Enter player name
@@ -68,8 +67,6 @@ void player_name() {//Enter player name
 		printf("%c", c);
 	}
 	fclose(fp);
-	gotoxy(24, 27);
-	printf("TEERAWAT CHANVIPARDILOK 64011154");
 	setcolor(6, 0);
 	gotoxy(16, 21);
 	printf("press enter to continue");
@@ -78,11 +75,36 @@ void player_name() {//Enter player name
 	cin >> name;
 }
 
+void exit_menu() {
+	gotoxy(0, 0);
+	setcolor(7, 0);
+	FILE* fp;
+	fp = fopen("exit_menu.txt", "r");
+	while (!feof(fp)) {
+		char c = fgetc(fp);
+		printf("%c", c);
+	}
+	fclose(fp);
+	
+}
+
 void draw_map1() {//map1
 	gotoxy(0, 0);
 	setcolor(7, 0);
 	FILE* fp;
 	fp = fopen("map1.txt", "r");
+	while (!feof(fp)) {
+		char c = fgetc(fp);
+		printf("%c", c);
+	}
+	fclose(fp);
+}
+
+void draw_map2() {
+	gotoxy(0, 0);
+	setcolor(7, 0);
+	FILE* fp;
+	fp = fopen("map2.txt", "r");
 	while (!feof(fp)) {
 		char c = fgetc(fp);
 		printf("%c", c);
@@ -334,7 +356,40 @@ int main() {
 	setcursor(0);
 	srand(time(NULL));
 	while (true) {
+		int exitState = 0;
+		int menuState = 0;
 		main_menu();
+		if (_getch() == 'x') {
+			while (true) {
+				int ch1 = ' ';
+				if (exitState == 0) {
+					exit_menu();
+					ch1 = _getch();
+					if (ch1 == 'p') {
+						main_menu();
+						menuState = 1;
+						exitState = 2;
+					}
+					else if (ch1 == 'x') {
+						exitState = 1;
+						break;
+					}
+				}
+				if (menuState == 1) {
+					main_menu();
+					if (_getch() == 'x') {
+						exitState = 0;
+					}
+					else {
+						exitState = 2;
+						break;
+					}
+				}
+			}
+		}
+		if (exitState == 1) {
+			break;
+		}
 		player_name();
 		char ch = ' ';
 		randomMap = 1;
@@ -477,8 +532,16 @@ int main() {
 				}
 				fflush(stdin); //clear keyboard buffer
 
+				//if hunter walk past super ghost then print super ghost
+				for (int b = 0; b <= 4; b++) {
+					if ((hunter.x - 1 == ghost[b].gx && hunter.y == ghost[b].gy) || (hunter.x + 1 == ghost[b].gx && hunter.y == ghost[b].gy) ||
+						(hunter.y - 1 == ghost[b].gy && hunter.x == ghost[b].gx) || (hunter.y + 1 == ghost[b].gy && hunter.x == ghost[b].gx)) {
+						draw_superGhost(ghost[b].gx, ghost[b].gy);
+					}
+				}
+
 				//if hunter walk past ghost then print ghost
-				for (int b = 0; b <= 17; b++) {
+				for (int b = 5; b <= 17; b++) {
 					if ((hunter.x - 1 == ghost[b].gx && hunter.y == ghost[b].gy) || (hunter.x + 1 == ghost[b].gx && hunter.y == ghost[b].gy) ||
 						(hunter.y - 1 == ghost[b].gy && hunter.x == ghost[b].gx) || (hunter.y + 1 == ghost[b].gy && hunter.x == ghost[b].gx)) {
 						draw_ghost(ghost[b].gx, ghost[b].gy);

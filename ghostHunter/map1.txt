@@ -1,9 +1,9 @@
 +__________________________________________________+     +
-|        xx   xx    xxx   xx       xxx    xxxxx    |     |
-| xx xxx x  x    xx xxx x xx xxx x  xx xx   x   xx |     |
-| xx xxx   xxx x xx     x xx xxx xx     x x   x  x |     |
-|     xx x     x   xxx x   x x      x x   xxx xx x |     |
-| xxx xx xxx xx  x       x     x xx x xxx xxx      |     |
+|        xx   xx    xxx   xx       xxx    xxxxx    |Press|
+| xx xxx x  x    xx xxx x xx xxx x  xx xx   x   xx |  x  |
+| xx xxx   xxx x xx     x xx xxx xx     x x   x  x |  to |
+|     xx x     x   xxx x   x x      x x   xxx xx x | quit|
+| xxx xx xxx xx  x       x     x xx x xxx xxx      | game|
 | xxx        xx xx xxxx xxxx xx  x  x         xxx x|     |
 | xxx xx xxx xx    xx   xx   xx xx xxxx xxxx xx   x|     |
 | xxx xx  xx xxx x xx x xx x     x        x     x x|     |

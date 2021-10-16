@@ -40,5 +40,14 @@
     <Text Include="player_name.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="exit_menu.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="map2.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="score_board.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
