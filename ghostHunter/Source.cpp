@@ -34,11 +34,6 @@ struct power {
 	int powy;
 }POW[2];
 
-void setcolor(int fg, int bg) {
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hConsole, bg * 16 + fg);
-}
-
 void main_menu() {//main menu
 	gotoxy(0, 0);
 	setcolor(7, 0);
@@ -55,6 +50,9 @@ void main_menu() {//main menu
 	setcolor(4, 0);
 	gotoxy(18, 19);
 	printf("press x to quit game");
+	setcolor(2, 0);
+	gotoxy(17, 22);
+	printf("press s to score board");
 }
 
 void player_name() {//Enter player name
@@ -358,10 +356,14 @@ int main() {
 	while (true) {
 		int exitState = 0;
 		int menuState = 0;
+		int scoreState = 0;
+		char ch1 = ' ';
 		main_menu();
-		if (_getch() == 'x') {
+		ch1 = _getch();
+		//exit menu
+		if (ch1 == 'x') {
 			while (true) {
-				int ch1 = ' ';
+				char ch1 = ' ';
 				if (exitState == 0) {
 					exit_menu();
 					ch1 = _getch();
@@ -377,8 +379,12 @@ int main() {
 				}
 				if (menuState == 1) {
 					main_menu();
-					if (_getch() == 'x') {
+					ch1 = _getch();
+					if (ch1 == 'x') {
 						exitState = 0;
+					}
+					else if (ch1 == 's') {
+						score_board();
 					}
 					else {
 						exitState = 2;
@@ -387,6 +393,46 @@ int main() {
 				}
 			}
 		}
+		//score board
+		if (ch1 == 's') {
+			while (true) {
+				char ch1 = ' ';
+				if (scoreState == 0) {
+					score_board();
+					main_menu();
+					menuState = 1;
+					scoreState = 2;
+				}
+				if (menuState == 1) {
+					main_menu();
+					ch1 = _getch();
+					if (ch1 == 's') {
+						scoreState = 0;
+					}
+					else if (ch1 == 'x') {
+						exitState = 1;
+						menuState = 0;
+					}
+					else {
+						break;
+					}
+				}
+				if (exitState == 1) {
+					exit_menu();
+					ch1 = _getch();
+					if (ch1 == 'p') {
+						main_menu();
+						menuState = 1;
+						exitState = 2;
+					}
+					else if (ch1 == 'x') {
+						exitState = 1;
+						break;
+					}
+				}
+			}
+		}
+		//quit game
 		if (exitState == 1) {
 			break;
 		}

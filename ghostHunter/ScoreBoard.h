@@ -16,6 +16,11 @@ inline void gotoxy(int x, int y) {//go to x,y
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
 
+inline void setcolor(int fg, int bg) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, bg * 16 + fg);
+}
+
 inline void ScoreBoard(string PlayerName,unsigned int PlayerScore) 
 {
     FILE* fp;
@@ -65,10 +70,12 @@ inline void scoreUI() {
         printf("%c", c);
     }
     fclose(fp1);
+    setcolor(6, 0);
     gotoxy(18, 10);
     cout << name[0];
     gotoxy(33, 10);
     cout << score[0];
+    setcolor(7, 0);
     gotoxy(18, 13);
     cout << name[1];
     gotoxy(33, 13);
