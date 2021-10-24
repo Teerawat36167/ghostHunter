@@ -4,7 +4,7 @@
 
 string name;
 int sc = 0; //score
-int lp = 2; //LP
+int lp = 3; //LP
 int pt = 30;//count point
 int pHunter = 0;//power hunter
 int countPower = 2;//count power
@@ -20,8 +20,6 @@ struct ghost {
 struct hunter {
 	int x;
 	int y;
-	int hp;
-	int power;
 }hunter;
 
 struct point {
@@ -191,7 +189,7 @@ void draw_power(int i) {//draw power
 
 void ghost_run() {
 	int i;
-	for (int a = 5; a <= 17; a++) {
+	for (int a = 4; a <= 17; a++) {
 		i = rand() % 4 + 1;
 		if (i == 1) {
 			if (cursor(ghost[a].gx - 1, ghost[a].gy) == 'x' || (ghost[a].gx == 1)) {
@@ -249,30 +247,74 @@ void ghost_run() {
 }
 
 void superGhost_run(int x) {
-	int i;
+	int i = 0;
 	if (ghost[x].gx < hunter.x) {
-		while (true) {
-			i = rand() % 4 + 1;
-			if (i != 3) {
-				break;
+		if (cursor(ghost[x].gx + 1, ghost[x].gy) == ' ' || cursor(ghost[x].gx + 1, ghost[x].gy) == 'O') {
+			i = 4;
+		}
+		else if (cursor(ghost[x].gx + 1, ghost[x].gy) == 'x') {
+			if (cursor(ghost[x].gx, ghost[x].gy - 1) == 'x' && cursor(ghost[x].gx, ghost[x].gy + 1) == ' ') {
+				i = 2;
+			}
+			else if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' && cursor(ghost[x].gx, ghost[x].gy + 1) == 'x') {
+				i = 1;
+			}
+			else if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' && cursor(ghost[x].gx, ghost[x].gy + 1) == ' ') {
+				if (ghost[x].gy < hunter.y) {
+					i = 2;
+				}
+				else if (ghost[x].gy > hunter.y) {
+					i = 1;
+				}
+				else {
+					i = rand() % 2 + 1;
+				}
 			}
 		}
 	}
 	if (ghost[x].gx > hunter.x) {
-		i = rand() % 3 + 1;
-	}
-	if (ghost[x].gy < hunter.y && ghost[x].gx == hunter.x) {
-		i = rand() % 4 + 2;
-	}
-	if (ghost[x].gy > hunter.y && ghost[x].gx == hunter.x) {
-		while (true) {
-			i = rand() % 4 + 1;
-			if (i != 2) {
-				break;
+		if (cursor(ghost[x].gx - 1, ghost[x].gy) == ' ' || cursor(ghost[x].gx - 1, ghost[x].gy) == 'O') {
+			i = 3;
+		}
+		else if (cursor(ghost[x].gx - 1, ghost[x].gy) == 'x') {
+			if (cursor(ghost[x].gx, ghost[x].gy - 1) == 'x' && cursor(ghost[x].gx, ghost[x].gy + 1) == ' ') {
+				i = 2;
+			}
+			else if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' && cursor(ghost[x].gx, ghost[x].gy + 1) == 'x') {
+				i = 1;
+			}
+			else if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' && cursor(ghost[x].gx, ghost[x].gy + 1) == ' ') {
+				if (ghost[x].gy < hunter.y) {
+					i = 2;
+				}
+				else if (ghost[x].gy > hunter.y) {
+					i = 1;
+				}
+				else {
+					i = rand() % 2 + 1;
+				}
 			}
 		}
 	}
-	if (i == 3) {
+	else if (ghost[x].gx == hunter.x) {
+		if (ghost[x].gy > hunter.y) {
+			if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'O') {
+				i = 1;
+			}
+			else if (cursor(ghost[x].gx, ghost[x].gy - 1) == 'x') {
+				i = rand() % 2 + 3;
+			}
+		}
+		else if (ghost[x].gy < hunter.y) {
+			if (cursor(ghost[x].gx, ghost[x].gy + 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'O') {
+				i = 2;
+			}
+			else if (cursor(ghost[x].gx, ghost[x].gy + 1) == 'x') {
+				i = rand() % 2 + 3;
+			}
+		}
+	}
+	if (i == 3) {//left
 		if (cursor(ghost[x].gx - 1, ghost[x].gy) == 'x' || (ghost[x].gx == 1)) {
 			draw_superGhost(ghost[x].gx, ghost[x].gy);
 		}
@@ -281,7 +323,7 @@ void superGhost_run(int x) {
 			draw_superGhost(--ghost[x].gx, ghost[x].gy);
 		}
 	}
-	if (i == 4) {
+	if (i == 4) {//right
 		if (cursor(ghost[x].gx + 1, ghost[x].gy) == 'x' || (ghost[x].gx == 50)) {
 			draw_superGhost(ghost[x].gx, ghost[x].gy);
 		}
@@ -290,7 +332,7 @@ void superGhost_run(int x) {
 			draw_superGhost(++ghost[x].gx, ghost[x].gy);
 		}
 	}
-	if (i == 1) {
+	if (i == 1) {//up
 		if (cursor(ghost[x].gx, ghost[x].gy - 1) == 'x' || (ghost[x].gy == 1)) {
 			draw_superGhost(ghost[x].gx, ghost[x].gy);
 		}
@@ -299,7 +341,7 @@ void superGhost_run(int x) {
 			draw_superGhost(ghost[x].gx, --ghost[x].gy);
 		}
 	}
-	if (i == 2) {
+	if (i == 2) {//down
 		if (cursor(ghost[x].gx, ghost[x].gy + 1) == 'x' || (ghost[x].gy == 25)) {
 			draw_superGhost(ghost[x].gx, ghost[x].gy);
 		}
@@ -358,6 +400,13 @@ int main() {
 		int menuState = 0;
 		int scoreState = 0;
 		char ch1 = ' ';
+		lp = 3;
+		sc = 0;
+		pt = 30;
+		pHunter = 0;
+		countPower = 2;
+		countWalk = 0;
+		timePower = 0;
 		main_menu();
 		ch1 = _getch();
 		//exit menu
@@ -442,13 +491,13 @@ int main() {
 		if (randomMap == 1) {
 			draw_map1();
 			//hunter map 1
-			hunter = { 4,4,2,0 };
+			hunter = { 4,4 };
 			//ghost position map 1
 			ghost[0] = { 1,9 };//super ghost
 			ghost[1] = { 14, 15 };//super ghost
 			ghost[2] = { 31, 15 };//super ghost
 			ghost[3] = { 41, 13 };//super ghost
-			ghost[4] = { 32, 25 };//super ghost
+			ghost[4] = { 32, 25 };
 			ghost[5] = { 1,17 };
 			ghost[6] = { 16,7 };
 			ghost[7] = { 16,25 };
@@ -497,10 +546,10 @@ int main() {
 			POW[0] = { 10,16 };
 			POW[1] = { 38,14 };
 		}
-		for (int a = 0; a <= 4; a++) {
+		for (int a = 0; a <= 3; a++) {
 			draw_superGhost(ghost[a].gx, ghost[a].gy);
 		}
-		for (int a = 5; a <= 17; a++) {
+		for (int a = 4; a <= 17; a++) {
 			draw_ghost(ghost[a].gx, ghost[a].gy);
 		}
 		draw_point();
@@ -519,10 +568,9 @@ int main() {
 				superGhost_run(1);
 				superGhost_run(2);
 				superGhost_run(3);
-				superGhost_run(4);
 				if (ch == 'a') {
 					if (hunter.x == 1) {//if x,y = condition then continue
-						continue;
+						draw_hunter(hunter.x, hunter.y);
 					}
 					else {
 						if (cursor(--hunter.x, hunter.y) == 'x') { //if hunter hit the wall then continue
@@ -536,7 +584,7 @@ int main() {
 				}
 				if (ch == 'd') {
 					if (hunter.x == 50) {//if x,y = condition then continue
-						continue;
+						draw_hunter(hunter.x, hunter.y);
 					}
 					else {
 						if (cursor(++hunter.x, hunter.y) == 'x') { //if hunter hit the wall then continue
@@ -550,7 +598,7 @@ int main() {
 				}
 				if (ch == 'w') {
 					if (hunter.y == 1) {//if x,y = condition then continue
-						continue;
+						draw_hunter(hunter.x, hunter.y);
 					}
 					else {
 						if (cursor(hunter.x, --hunter.y) == 'x') { //if hunter hit the wall then continue
@@ -564,7 +612,7 @@ int main() {
 				}
 				if (ch == 's') {
 					if (hunter.y == 25) {
-						continue;
+						draw_hunter(hunter.x, hunter.y);
 					}
 					else {
 						if (cursor(hunter.x, ++hunter.y) == 'x') { //if hunter hit the wall then continue
@@ -579,7 +627,7 @@ int main() {
 				fflush(stdin); //clear keyboard buffer
 
 				//if hunter walk past super ghost then print super ghost
-				for (int b = 0; b <= 4; b++) {
+				for (int b = 0; b <= 3; b++) {
 					if ((hunter.x - 1 == ghost[b].gx && hunter.y == ghost[b].gy) || (hunter.x + 1 == ghost[b].gx && hunter.y == ghost[b].gy) ||
 						(hunter.y - 1 == ghost[b].gy && hunter.x == ghost[b].gx) || (hunter.y + 1 == ghost[b].gy && hunter.x == ghost[b].gx)) {
 						draw_superGhost(ghost[b].gx, ghost[b].gy);
@@ -587,7 +635,7 @@ int main() {
 				}
 
 				//if hunter walk past ghost then print ghost
-				for (int b = 5; b <= 17; b++) {
+				for (int b = 4; b <= 17; b++) {
 					if ((hunter.x - 1 == ghost[b].gx && hunter.y == ghost[b].gy) || (hunter.x + 1 == ghost[b].gx && hunter.y == ghost[b].gy) ||
 						(hunter.y - 1 == ghost[b].gy && hunter.x == ghost[b].gx) || (hunter.y + 1 == ghost[b].gy && hunter.x == ghost[b].gx)) {
 						draw_ghost(ghost[b].gx, ghost[b].gy);
@@ -606,7 +654,7 @@ int main() {
 
 				//count lp and respawn hunter
 				for (int b = 0; b <= 17; b++) {
-					if (hunter.x == ghost[b].gx && hunter.y == ghost[b].gy && pHunter == 0) {
+					if ((hunter.x == ghost[b].gx && hunter.y == ghost[b].gy && pHunter == 0)) {
 						lp -= 1;
 						if (randomMap == 1) {//map1
 							hunter.x = 4;
