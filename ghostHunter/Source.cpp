@@ -249,17 +249,33 @@ void ghost_run() {
 void superGhost_run(int x) {
 	int i = 0;
 	if (ghost[x].gx < hunter.x) {
-		if (cursor(ghost[x].gx + 1, ghost[x].gy) == ' ' || cursor(ghost[x].gx + 1, ghost[x].gy) == 'O') {
+		if (cursor(ghost[x].gx + 1, ghost[x].gy) == ' ' || cursor(ghost[x].gx + 1, ghost[x].gy) == 'O' ||
+			cursor(ghost[x].gx + 1, ghost[x].gy) == 'W' || cursor(ghost[x].gx + 1, ghost[x].gy) == 'P' ||
+			cursor(ghost[x].gx + 1, ghost[x].gy) == '.' || cursor(ghost[x].gx + 1, ghost[x].gy) == '_' ||
+			cursor(ghost[x].gx + 1, ghost[x].gy) == '-') {
 			i = 4;
 		}
 		else if (cursor(ghost[x].gx + 1, ghost[x].gy) == 'x') {
-			if (cursor(ghost[x].gx, ghost[x].gy - 1) == 'x' && cursor(ghost[x].gx, ghost[x].gy + 1) == ' ') {
+			if (cursor(ghost[x].gx, ghost[x].gy - 1) == 'x' && 
+				// y-1='x'
+				(cursor(ghost[x].gx, ghost[x].gy + 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'W') ||
+				cursor(ghost[x].gx, ghost[x].gy + 1) == '.' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'P' ||
+				cursor(ghost[x].gx, ghost[x].gy + 1) == '_' || cursor(ghost[x].gx, ghost[x].gy + 1) == '-') {
 				i = 2;
 			}
-			else if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' && cursor(ghost[x].gx, ghost[x].gy + 1) == 'x') {
+			else if ((cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'W' ||
+				cursor(ghost[x].gx, ghost[x].gy - 1) == '.' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'P' ||
+				cursor(ghost[x].gx, ghost[x].gy - 1) == '_' || cursor(ghost[x].gx, ghost[x].gy - 1) == '-')
+				// y+1='x'
+				&& cursor(ghost[x].gx, ghost[x].gy + 1) == 'x') {
 				i = 1;
 			}
-			else if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' && cursor(ghost[x].gx, ghost[x].gy + 1) == ' ') {
+			else if ((cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'W' ||
+				cursor(ghost[x].gx, ghost[x].gy - 1) == '.' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'P')
+				//
+				&& (cursor(ghost[x].gx, ghost[x].gy + 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'W' ||
+					cursor(ghost[x].gx, ghost[x].gy + 1) == '.' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'P' ||
+					cursor(ghost[x].gx, ghost[x].gy + 1) == '_' || cursor(ghost[x].gx, ghost[x].gy + 1) == '-')) {
 				if (ghost[x].gy < hunter.y) {
 					i = 2;
 				}
@@ -273,17 +289,33 @@ void superGhost_run(int x) {
 		}
 	}
 	if (ghost[x].gx > hunter.x) {
-		if (cursor(ghost[x].gx - 1, ghost[x].gy) == ' ' || cursor(ghost[x].gx - 1, ghost[x].gy) == 'O') {
+		if (cursor(ghost[x].gx - 1, ghost[x].gy) == ' ' || cursor(ghost[x].gx - 1, ghost[x].gy) == 'O' ||
+			cursor(ghost[x].gx - 1, ghost[x].gy) == '.' || cursor(ghost[x].gx - 1, ghost[x].gy) == 'P' ||
+			cursor(ghost[x].gx - 1, ghost[x].gy) == 'W' || cursor(ghost[x].gx - 1, ghost[x].gy) == '-' ||
+			cursor(ghost[x].gx - 1, ghost[x].gy) == '_') {
 			i = 3;
 		}
 		else if (cursor(ghost[x].gx - 1, ghost[x].gy) == 'x') {
-			if (cursor(ghost[x].gx, ghost[x].gy - 1) == 'x' && cursor(ghost[x].gx, ghost[x].gy + 1) == ' ') {
+			if (cursor(ghost[x].gx, ghost[x].gy - 1) == 'x' && 
+				//y-1='x'
+				(cursor(ghost[x].gx, ghost[x].gy + 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'W' ||
+				cursor(ghost[x].gx, ghost[x].gy + 1) == '.' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'P' ||
+				cursor(ghost[x].gx, ghost[x].gy + 1) == '-') || cursor(ghost[x].gx, ghost[x].gy + 1) == '_') {
 				i = 2;
 			}
-			else if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' && cursor(ghost[x].gx, ghost[x].gy + 1) == 'x') {
+			else if ((cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'W' ||
+				cursor(ghost[x].gx, ghost[x].gy - 1) == '.' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'P' ||
+				cursor(ghost[x].gx, ghost[x].gy - 1) == '-' || cursor(ghost[x].gx, ghost[x].gy - 1) == '_')
+				//y+1='x'
+				&& cursor(ghost[x].gx, ghost[x].gy + 1) == 'x') {
 				i = 1;
 			}
-			else if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' && cursor(ghost[x].gx, ghost[x].gy + 1) == ' ') {
+			else if ((cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'W' ||
+				cursor(ghost[x].gx, ghost[x].gy - 1) == '.' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'P')
+				//
+				&& (cursor(ghost[x].gx, ghost[x].gy + 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'W') ||
+				cursor(ghost[x].gx, ghost[x].gy + 1) == '.' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'P' ||
+				cursor(ghost[x].gx, ghost[x].gy + 1) == '-' || cursor(ghost[x].gx, ghost[x].gy + 1) == '_') {
 				if (ghost[x].gy < hunter.y) {
 					i = 2;
 				}
@@ -298,7 +330,9 @@ void superGhost_run(int x) {
 	}
 	else if (ghost[x].gx == hunter.x) {
 		if (ghost[x].gy > hunter.y) {
-			if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'O') {
+			if (cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'O' ||
+				cursor(ghost[x].gx, ghost[x].gy - 1) == 'W' || cursor(ghost[x].gx, ghost[x].gy - 1) == '.' ||
+				cursor(ghost[x].gx, ghost[x].gy - 1) == 'P') {
 				i = 1;
 			}
 			else if (cursor(ghost[x].gx, ghost[x].gy - 1) == 'x') {
@@ -306,7 +340,9 @@ void superGhost_run(int x) {
 			}
 		}
 		else if (ghost[x].gy < hunter.y) {
-			if (cursor(ghost[x].gx, ghost[x].gy + 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'O') {
+			if (cursor(ghost[x].gx, ghost[x].gy + 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'O' ||
+				cursor(ghost[x].gx, ghost[x].gy + 1) == 'W' || cursor(ghost[x].gx, ghost[x].gy + 1) == '.' ||
+				cursor(ghost[x].gx, ghost[x].gy + 1) == 'P') {
 				i = 2;
 			}
 			else if (cursor(ghost[x].gx, ghost[x].gy + 1) == 'x') {
