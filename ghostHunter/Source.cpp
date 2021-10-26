@@ -272,7 +272,8 @@ void superGhost_run() {
 					i[x] = 1;
 				}
 				else if ((cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'W' ||
-					cursor(ghost[x].gx, ghost[x].gy - 1) == '.' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'P')
+					cursor(ghost[x].gx, ghost[x].gy - 1) == '.' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'P' ||
+					cursor(ghost[x].gx, ghost[x].gy - 1) == '_' || cursor(ghost[x].gx, ghost[x].gy - 1) == '-')
 					//
 					&& (cursor(ghost[x].gx, ghost[x].gy + 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'W' ||
 						cursor(ghost[x].gx, ghost[x].gy + 1) == '.' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'P' ||
@@ -312,7 +313,8 @@ void superGhost_run() {
 					i[x] = 1;
 				}
 				else if ((cursor(ghost[x].gx, ghost[x].gy - 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'W' ||
-					cursor(ghost[x].gx, ghost[x].gy - 1) == '.' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'P')
+					cursor(ghost[x].gx, ghost[x].gy - 1) == '.' || cursor(ghost[x].gx, ghost[x].gy - 1) == 'P' ||
+					cursor(ghost[x].gx, ghost[x].gy - 1) == '-' || cursor(ghost[x].gx, ghost[x].gy - 1) == '_')
 					//
 					&& (cursor(ghost[x].gx, ghost[x].gy + 1) == ' ' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'W') ||
 					cursor(ghost[x].gx, ghost[x].gy + 1) == '.' || cursor(ghost[x].gx, ghost[x].gy + 1) == 'P' ||
