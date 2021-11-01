@@ -189,7 +189,7 @@ void draw_power(int i) {//draw power
 
 void draw_warp(int i) {
 	gotoxy(warp[i].powx, warp[i].powy);
-	setcolor(9, 7);
+	setcolor(10, 0);
 	std::printf("#");
 }
 
@@ -253,7 +253,7 @@ void ghost_run() {
 			if ((ghost[a].gy - 1 == warp[b].powy && ghost[a].gx == warp[b].powx) || (ghost[a].gx - 1 == warp[b].powx && ghost[a].gy == warp[b].powy) ||
 				(ghost[a].gx + 1 == warp[b].powx && ghost[a].gy == warp[b].powy) || (ghost[a].gy + 1 == warp[b].powy && ghost[a].gx == warp[b].powx)) {
 				gotoxy(warp[b].powx, warp[b].powy);
-				setcolor(9, 7);
+				setcolor(10, 0);
 				std::printf("#");
 			}
 		}
@@ -431,7 +431,7 @@ void superGhost_run() {
 			if ((ghost[x].gy - 1 == warp[b].powy && ghost[x].gx == warp[b].powx) || (ghost[x].gx - 1 == warp[b].powx && ghost[x].gy == warp[b].powy) ||
 				(ghost[x].gx + 1 == warp[b].powx && ghost[x].gy == warp[b].powy) || (ghost[x].gy + 1 == warp[b].powy && ghost[x].gx == warp[b].powx)) {
 				gotoxy(warp[b].powx, warp[b].powy);
-				setcolor(9, 7);
+				setcolor(10, 0);
 				std::printf("#");
 			}
 		}
@@ -469,6 +469,40 @@ void oldPosition() {
 	}
 	oldHunter.x = hunter.x;
 	oldHunter.y = hunter.y;
+}
+
+void go_warp(int x) {
+	int i;
+	if (x == 0) {
+		i = rand() % 2 + 1;
+		del_draw(hunter.x, hunter.y);
+		hunter.x = warp[i].powx;
+		hunter.y = warp[i].powy;
+		draw_hunter(hunter.x, hunter.y);
+		draw_warp(x);
+	}
+	else if (x == 1) {
+		int a = rand() % 2;
+		if (a == 0) {
+			i = 0;
+		}
+		else if (a == 1) {
+			i = 2;
+		}
+		del_draw(hunter.x, hunter.y);
+		hunter.x = warp[i].powx;
+		hunter.y = warp[i].powy;
+		draw_hunter(hunter.x, hunter.y);
+		draw_warp(x);
+	}
+	else if (x == 2) {
+		i = rand() % 2;
+		del_draw(hunter.x, hunter.y);
+		hunter.x = warp[i].powx;
+		hunter.y = warp[i].powy;
+		draw_hunter(hunter.x, hunter.y);
+		draw_warp(x);
+	}
 }
 
 int main() {
@@ -642,6 +676,7 @@ int main() {
 		draw_power(1);
 		draw_warp(0);
 		draw_warp(1);
+		draw_warp(2);
 		draw_hunter(hunter.x, hunter.y);
 		do {
 			score();
@@ -711,11 +746,24 @@ int main() {
 				}
 				fflush(stdin); //clear keyboard buffer
 
-				//go warp
-				
+				//hunter go warp
+				for (int b = 0; b < 3; b++) {
+					if (hunter.x == warp[b].powx && hunter.y == warp[b].powy) {
+						go_warp(b);
+						break;
+					}
+				}
+				for (int b = 0; b < 3; b++) {
+					if ((hunter.y - 1 == warp[b].powy && hunter.x == warp[b].powx) || (hunter.x - 1 == warp[b].powx && hunter.y == warp[b].powy) ||
+						(hunter.x + 1 == warp[b].powx && hunter.y == warp[b].powy) || (hunter.y + 1 == warp[b].powy && hunter.x == warp[b].powx)) {
+						gotoxy(warp[b].powx, warp[b].powy);
+						setcolor(10, 0);
+						std::printf("#");
+					}
+				}
 
 				//if hunter walk past super ghost then print super ghost
-				for (int b = 0; b <= 3; b++) {
+				for (int b = 0; b < 3; b++) {
 					if ((hunter.x - 1 == ghost[b].gx && hunter.y == ghost[b].gy) || (hunter.x + 1 == ghost[b].gx && hunter.y == ghost[b].gy) ||
 						(hunter.y - 1 == ghost[b].gy && hunter.x == ghost[b].gx) || (hunter.y + 1 == ghost[b].gy && hunter.x == ghost[b].gx)) {
 						draw_superGhost(ghost[b].gx, ghost[b].gy);
@@ -723,7 +771,7 @@ int main() {
 				}
 
 				//if hunter walk past ghost then print ghost
-				for (int b = 4; b <= 17; b++) {
+				for (int b = 3; b <= 17; b++) {
 					if ((hunter.x - 1 == ghost[b].gx && hunter.y == ghost[b].gy) || (hunter.x + 1 == ghost[b].gx && hunter.y == ghost[b].gy) ||
 						(hunter.y - 1 == ghost[b].gy && hunter.x == ghost[b].gx) || (hunter.y + 1 == ghost[b].gy && hunter.x == ghost[b].gx)) {
 						draw_ghost(ghost[b].gx, ghost[b].gy);
@@ -731,7 +779,7 @@ int main() {
 				}
 
 				//count score
-				for (int b = 0; b<= 29; b++) {
+				for (int b = 0; b <= 29; b++) {
 					if (hunter.x == point[b].px && hunter.y == point[b].py) {
 						sc += 100;
 						pt -= 1;
@@ -799,7 +847,7 @@ int main() {
 						}
 					}
 				}
-				
+
 				//ghost <---> hunter
 				for (int b = 0; b < 3; b++) {
 					if (hunter.x == oldPos[b].gx && hunter.y == oldPos[b].gy &&
