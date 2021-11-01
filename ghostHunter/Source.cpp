@@ -762,6 +762,31 @@ int main() {
 					}
 				}
 
+				//if ghost hit warp then respawn ghost
+				for (int b = 0; b < 18; b++) {
+					for (int a = 0; a < 3; a++) {
+						if (ghost[b].gx == warp[a].powx && ghost[b].gy == warp[a].powy) {
+							int c;
+							c = rand() % 4;
+							if (c == 0) {
+								del_draw(ghost[b].gx, ghost[b].gy);
+								draw_warp(a);
+								ghost[b].gx = 7;
+								ghost[b].gy = 6;
+							}
+							else if (c == 1) {
+
+							}
+							else if (c == 2) {
+
+							}
+							else if (c == 3) {
+
+							}
+						}
+					}
+				}
+
 				//if hunter walk past super ghost then print super ghost
 				for (int b = 0; b < 3; b++) {
 					if ((hunter.x - 1 == ghost[b].gx && hunter.y == ghost[b].gy) || (hunter.x + 1 == ghost[b].gx && hunter.y == ghost[b].gy) ||
