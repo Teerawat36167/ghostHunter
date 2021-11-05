@@ -505,6 +505,19 @@ void go_warp(int x) {
 	}
 }
 
+void winner() {
+	gotoxy(0, 0);
+	setcolor(7, 0);
+	FILE* fp;
+	fp = fopen("winner.txt", "r");
+	while (!feof(fp)) {
+		char c = fgetc(fp);
+		std::printf("%c", c);
+	}
+	fclose(fp);
+	_getch();
+}
+
 int main() {
 	setcursor(0);
 	srand(time(NULL));
@@ -773,15 +786,48 @@ int main() {
 								draw_warp(a);
 								ghost[b].gx = 7;
 								ghost[b].gy = 6;
+								if (b < 3) {
+									draw_superGhost(ghost[b].gx,ghost[b].gy);
+								}
+								else if (b >= 3) {
+									draw_ghost(ghost[b].gx, ghost[b].gy);
+								}
 							}
 							else if (c == 1) {
-
+								del_draw(ghost[b].gx, ghost[b].gy);
+								draw_warp(a);
+								ghost[b].gx = 11;
+								ghost[b].gy = 23;
+								if (b < 3) {
+									draw_superGhost(ghost[b].gx, ghost[b].gy);
+								}
+								else if (b >= 3) {
+									draw_ghost(ghost[b].gx, ghost[b].gy);
+								}
 							}
 							else if (c == 2) {
-
+								del_draw(ghost[b].gx, ghost[b].gy);
+								draw_warp(a);
+								ghost[b].gx = 39;
+								ghost[b].gy = 4;
+								if (b < 3) {
+									draw_superGhost(ghost[b].gx, ghost[b].gy);
+								}
+								else if (b >= 3) {
+									draw_ghost(ghost[b].gx, ghost[b].gy);
+								}
 							}
 							else if (c == 3) {
-
+								del_draw(ghost[b].gx, ghost[b].gy);
+								draw_warp(a);
+								ghost[b].gx = 45;
+								ghost[b].gy = 20;
+								if (b < 3) {
+									draw_superGhost(ghost[b].gx, ghost[b].gy);
+								}
+								else if (b >= 3) {
+									draw_ghost(ghost[b].gx, ghost[b].gy);
+								}
 							}
 						}
 					}
@@ -944,6 +990,9 @@ int main() {
 			}
 			Sleep(100);
 		} while (ch != 'x' && lp != 0 && pt != 0);
+		if (pt == 0) {
+			winner();
+		}
 		game_over();
 		score_board();
 	}

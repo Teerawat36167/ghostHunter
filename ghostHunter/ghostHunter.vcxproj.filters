@@ -49,5 +49,8 @@
     <Text Include="score_board.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="winner.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

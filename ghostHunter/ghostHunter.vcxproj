@@ -153,6 +153,7 @@
     <Text Include="player_name.txt" />
     <Text Include="score.txt" />
     <Text Include="score_board.txt" />
+    <Text Include="winner.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
