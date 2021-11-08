@@ -1,5 +1,5 @@
+Tee 4200
 Tee 3900
-Tee 1200
-Tee 100
-Tee 100
-??? 0
+Tee 3700
+Tee 2800
+Tee 2600
