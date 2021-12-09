@@ -1,2 +1,2 @@
-# Programming Project 2564
-## Programming Fundamental
+# Programming Project
+<h3> Programming Fundamental 2564 </h3>
